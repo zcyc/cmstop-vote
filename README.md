@@ -17,10 +17,14 @@
 ![img.png](img.png)
 
 ### 安装依赖
-pip install requests
+双击安装依赖
+
+或者 pip install requests
 
 ### 启动程序
-python main.py
+双击启动程序
+
+或者 python main.py
 
 ### 参数配置
 根据程序提示输入，输入后按回车键确认
