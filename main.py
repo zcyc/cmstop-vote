@@ -86,7 +86,7 @@ def get_vote_id_from_vote_url(vote_url):
 
 if __name__ == '__main__':
     # 获取用户输入的投票链接
-    vote_url = input("请输入投票链接: ")
+    vote_url = input("请输入投票链接，输入后回车: ")
     if not vote_url:
         print("投票链接为空或错误")
         sys.exit()
@@ -96,7 +96,7 @@ if __name__ == '__main__':
         print("投票链接为空或错误")
         sys.exit()
     # 获取用户输入的用户编号
-    title = input("请输入用户编号: ")
+    title = input("请输入用户编号，输入后回车: ")
     if not title:
         print("用户编号为空或错误")
         sys.exit()
