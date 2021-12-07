@@ -102,7 +102,7 @@ if __name__ == '__main__':
         sys.exit()
     # 获取投票项
     vote_item = get(vote_id, title)
-    print(f'您好，{vote_item["title"]},您的当前票数是：{vote_item["vote_numbers"]}')
+    print(f'你好，{vote_item["title"]}。你的当前票数是：{vote_item["vote_numbers"]}。')
     vote_item_id = vote_item["vote_items_id"]
     # 获取用户输入的投票人数
     total = input("请输入投票人数(默认为 1000)，输入数字后回车，或者直接回车取默认值:") or 1000
