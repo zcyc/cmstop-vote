@@ -17,14 +17,14 @@
 ![img.png](img.png)
 
 ### 安装依赖
-双击安装依赖
+Windows 双击安装依赖.bat
 
-或者 pip install requests
+其他系统 pip install requests
 
 ### 启动程序
-双击启动程序
+Windows 双击启动程序.bat
 
-或者 python main.py
+其他系统 python ./main.py
 
 ### 参数配置
 根据程序提示输入，输入后按回车键确认
