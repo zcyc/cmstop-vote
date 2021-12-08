@@ -89,7 +89,7 @@ def get_vote_id_from_vote_url(vote_url):
 
 if __name__ == '__main__':
     # 获取用户输入的投票链接
-    vote_url = input("请输入投票链接，输入后回车: ")
+    vote_url = input("请输入投票链接（输入后按回车键确认）: ")
     if not vote_url:
         print("投票链接为空或错误")
         sys.exit()
@@ -99,7 +99,7 @@ if __name__ == '__main__':
         print("投票链接为空或错误")
         sys.exit()
     # 获取用户输入的用户编号
-    title = input("请输入用户编号，输入后回车: ")
+    title = input("请输入用户编号（输入后按回车键确认）: ")
     if not title:
         print("用户编号为空或错误")
         sys.exit()
@@ -108,9 +108,9 @@ if __name__ == '__main__':
     print(f'你好，{vote_item["title"]}。你的当前票数是：{vote_item["vote_numbers"]}。')
     vote_item_id = vote_item["vote_items_id"]
     # 获取用户输入的投票人数
-    total = input("请输入投票人数(默认为 1000)，输入数字后回车，或者直接回车取默认值:") or 1000
+    total = input("请输入投票人数，不输入默认 1000（输入后按回车键确认）:") or 1000
     # 获取用户输入的每人投票次数
-    times = input("请输入每人投票次数(默认为 2)，输入数字后回车，或者直接回车取默认值:") or 2
+    times = input("请输入每人投票次数，不输入默认 2（输入后按回车键确认）:") or 2
     # 每次之后的休息时间，最少1秒，不要给投票软件造成负担
     sleep_time = 1
     for i in range(total):
