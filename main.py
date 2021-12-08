@@ -58,7 +58,10 @@ def submit(nonce, sign_str, timestamp, device_times, sleep_time, vote_id, vote_i
                                  verify=False)
         res = json.loads(response.text)
         print(res["message"])
-        sleep(sleep_time)
+        if res["message"] == 'time expire':
+            sleep(60)
+        else:
+            sleep(sleep_time)
 
 
 def get(vote_id, title):
