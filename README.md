@@ -12,15 +12,14 @@
 
 安装的时候注意
 * 图中箭头所指的的那个框一定要勾上，一定要勾上，一定要勾上，如果你用我给的链接下载，你看到的这句话数字应该是3.10。
-![image](https://user-images.githubusercontent.com/9925064/145348035-2833eab9-38b0-4f09-a5cd-3a4aca79801b.png)
+<img title="" src="https://user-images.githubusercontent.com/9925064/145348035-2833eab9-38b0-4f09-a5cd-3a4aca79801b.png" alt="install.png" height="300">
 
 
 ### 3、下载项目
 [点击下载项目压缩包](https://codeload.github.com/CharlieJ0hn/cmstop-vote-submit/zip/refs/heads/main)
 
-或者上方绿色的按钮 Code 然后点击 Download Zip
-![image](https://user-images.githubusercontent.com/9925064/145347941-5c298731-f9ca-411b-98e4-780a522539d4.png)
-
+或者如图所示，点击上方绿色的按钮 Code 然后点击 Download Zip
+<img title="" src="https://user-images.githubusercontent.com/9925064/145347941-5c298731-f9ca-411b-98e4-780a522539d4.png" alt="download.png" height="300">
 
 ### 4、安装依赖
 Windows 双击安装依赖.bat
