@@ -72,9 +72,17 @@ def submit(nonce, sign_str, timestamp):
             fail_num += 1
             current_times += 1
             print(
-                f'投票失败，当前进度：{current_times}票/{int(persons) * int(times)}票，第{current_persons}人-第{person_times}次'
+                f'{res["message"]}，当前进度：{current_times}票/{int(persons) * int(times)}票，第{current_persons}人-第{person_times}次'
                 f'/{int(persons)}人，成功{success_num}次，失败{fail_num}次。')
             sleep(60)
+        elif res["message"] == 'Too Many Attempts.':
+            person_times += 1
+            fail_num += 1
+            current_times += 1
+            print(
+                f'{res["message"]}，当前进度：{current_times}票/{int(persons) * int(times)}票，第{current_persons}人-第{person_times}次'
+                f'/{int(persons)}人，成功{success_num}次，失败{fail_num}次。')
+            sleep(30)
         else:
             person_times += 1
             success_num += 1
@@ -133,8 +141,8 @@ if __name__ == '__main__':
     persons = input("请输入投票人数，例如：1000，不输入默认 1000（输入后按回车键确认）:") or 1000
     # 获取用户输入的每人投票次数
     times = input("请输入每人投票次数，例如：1，不输入默认 2（输入后按回车键确认）:") or 2
-    # 每次之后的休息时间，最少1秒，不要给投票软件造成负担
-    sleep_time = 1
+    # 每次之后的休息时间，最少 0.2 秒，不然每访问 200 次会被屏蔽 30 秒。
+    sleep_time = 0.2
     for i in range(int(persons)):
         sign()
     print(
