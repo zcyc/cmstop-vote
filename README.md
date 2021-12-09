@@ -16,8 +16,10 @@
 
 ![img.png](img.png)
 
-### 3、下载本项目
-[点击下载本项目](https://codeload.github.com/CharlieJ0hn/cmstop-vote-submit/zip/refs/heads/main)
+### 3、下载项目
+[点击下载项目压缩包](https://codeload.github.com/CharlieJ0hn/cmstop-vote-submit/zip/refs/heads/main)
+
+或者上方绿色的按钮 Code 然后点击 Download Zip
 
 ### 4、安装依赖
 Windows 双击安装依赖.bat
