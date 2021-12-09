@@ -110,7 +110,8 @@ def get_vote_id_from_vote_url(vote_url):
 
 if __name__ == '__main__':
     # 获取用户输入的投票链接
-    vote_url = input("请输入投票链接（输入后按回车键确认）: ")
+    vote_url = input(
+        "请输入投票链接，例如：http://h5.vote.cmstop.com/pc/bvkaxc（输入后按回车键确认）: ")
     if not vote_url:
         print("投票链接为空或错误")
         sys.exit()
@@ -120,7 +121,7 @@ if __name__ == '__main__':
         print("投票链接为空或错误")
         sys.exit()
     # 获取用户输入的用户编号
-    title = input("请输入用户编号（输入后按回车键确认）: ")
+    title = input("请输入用户编号，例如：31（输入后按回车键确认）: ")
     if not title:
         print("用户编号为空或错误")
         sys.exit()
@@ -129,10 +130,13 @@ if __name__ == '__main__':
     print(f'你好，{vote_item["title"]}。你的当前票数是：{vote_item["vote_numbers"]}。')
     vote_item_id = vote_item["vote_items_id"]
     # 获取用户输入的投票人数
-    persons = input("请输入投票人数，不输入默认 1000（输入后按回车键确认）:") or 1000
+    persons = input("请输入投票人数，例如：1000，不输入默认 1000（输入后按回车键确认）:") or 1000
     # 获取用户输入的每人投票次数
-    times = input("请输入每人投票次数，不输入默认 2（输入后按回车键确认）:") or 2
+    times = input("请输入每人投票次数，例如：1，不输入默认 2（输入后按回车键确认）:") or 2
     # 每次之后的休息时间，最少1秒，不要给投票软件造成负担
     sleep_time = 1
     for i in range(int(persons)):
         sign()
+    print(
+        f'投票结束，你的当前票数约为：{int(vote_item["vote_numbers"]) + success_num}票。本次共投{current_times}票，'
+        f'共{current_persons}人，每人{times}次。')
