@@ -72,7 +72,7 @@ def submit(nonce, sign_str, timestamp):
             fail_num += 1
             current_times += 1
             print(
-                f'投票成功，当前进度：{current_times}票/{int(persons) * int(times)}票，第{current_persons}人-第{person_times}次'
+                f'投票失败，当前进度：{current_times}票/{int(persons) * int(times)}票，第{current_persons}人-第{person_times}次'
                 f'/{int(persons)}人，成功{success_num}次，失败{fail_num}次。')
             sleep(60)
         else:
@@ -80,7 +80,7 @@ def submit(nonce, sign_str, timestamp):
             success_num += 1
             current_times += 1
             print(
-                f'投票成功，当前进度：{current_times}票/{int(persons) * int(times)}票，第{current_persons}人-第{person_times}次'
+                f'{res["message"]}，当前进度：{current_times}票/{int(persons) * int(times)}票，第{current_persons}人-第{person_times}次'
                 f'/{int(persons)}人，成功{success_num}次，失败{fail_num}次。')
             sleep(sleep_time)
 
