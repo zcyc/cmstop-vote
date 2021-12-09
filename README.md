@@ -18,7 +18,8 @@
 ### 3、下载项目
 [点击下载项目压缩包](https://codeload.github.com/CharlieJ0hn/cmstop-vote-submit/zip/refs/heads/main)
 
-或者如图所示，点击上方绿色的按钮 Code 然后点击 Download Zip
+或者如下图所示，点击上方绿色的按钮 Code 然后点击 Download Zip
+
 <img title="" src="https://user-images.githubusercontent.com/9925064/145347941-5c298731-f9ca-411b-98e4-780a522539d4.png" alt="download.png" height="300">
 
 ### 4、安装依赖
