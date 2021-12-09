@@ -6,8 +6,13 @@ from time import sleep
 
 import requests
 
+fail_num = 0
+success_num = 0
+current_times = 0
+current_persons = 0
 
-def sign(times, sleep_time, vote_id, vote_item_id):
+
+def sign():
     headers = {
         'Proxy-Connection': 'keep-alive',
         'Accept': 'application/json, text/plain, */*',
@@ -28,10 +33,15 @@ def sign(times, sleep_time, vote_id, vote_item_id):
     res = json.loads(response.text)['data']
     # print("timestamp: ", res['timestamp'])
     # print("sign: ", res['sign'])
-    submit(nonce, res['sign'], res['timestamp'], times, sleep_time, vote_id, vote_item_id)
+    submit(nonce, res['sign'], res['timestamp'])
 
 
-def submit(nonce, sign_str, timestamp, device_times, sleep_time, vote_id, vote_item_id):
+def submit(nonce, sign_str, timestamp):
+    global fail_num
+    global success_num
+    global current_times
+    global current_persons
+    person_times = 0
     headers = {
         'Proxy-Connection': 'keep-alive',
         'Accept': 'application/json, text/plain, */*',
@@ -52,19 +62,30 @@ def submit(nonce, sign_str, timestamp, device_times, sleep_time, vote_id, vote_i
     # 投票数据
     data = {"vote_id": vote_id, "choices": choices, "platform": 0, "device_id": device_id, "timestamp": timestamp,
             "nonce": nonce, "sign": sign_str}
-
-    for i in range(int(device_times)):
+    current_persons += 1
+    for i in range(int(times)):
         response = requests.post('http://api.vote.cmstop.com/api/stat', headers=headers, data=json.dumps(data),
                                  verify=False)
         res = json.loads(response.text)
-        print(res["message"])
         if res["message"] == 'time expire':
+            person_times += 1
+            fail_num += 1
+            current_times += 1
+            print(
+                f'投票成功，当前进度：{current_times}票/{int(persons) * int(times)}票，第{current_persons}人-第{person_times}次'
+                f'/{int(persons)}人，成功{success_num}次，失败{fail_num}次。')
             sleep(60)
         else:
+            person_times += 1
+            success_num += 1
+            current_times += 1
+            print(
+                f'投票成功，当前进度：{current_times}票/{int(persons) * int(times)}票，第{current_persons}人-第{person_times}次'
+                f'/{int(persons)}人，成功{success_num}次，失败{fail_num}次。')
             sleep(sleep_time)
 
 
-def get(vote_id, title):
+def get():
     headers = {
         'Proxy-Connection': 'keep-alive',
         'Accept': 'application/json, text/plain, */*',
@@ -104,14 +125,14 @@ if __name__ == '__main__':
         print("用户编号为空或错误")
         sys.exit()
     # 获取投票项
-    vote_item = get(vote_id, title)
+    vote_item = get()
     print(f'你好，{vote_item["title"]}。你的当前票数是：{vote_item["vote_numbers"]}。')
     vote_item_id = vote_item["vote_items_id"]
     # 获取用户输入的投票人数
-    total = input("请输入投票人数，不输入默认 1000（输入后按回车键确认）:") or 1000
+    persons = input("请输入投票人数，不输入默认 1000（输入后按回车键确认）:") or 1000
     # 获取用户输入的每人投票次数
     times = input("请输入每人投票次数，不输入默认 2（输入后按回车键确认）:") or 2
     # 每次之后的休息时间，最少1秒，不要给投票软件造成负担
     sleep_time = 1
-    for i in range(int(total)):
-        sign(times, sleep_time, vote_id, vote_item_id)
+    for i in range(int(persons)):
+        sign()
