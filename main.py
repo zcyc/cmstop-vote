@@ -53,7 +53,7 @@ def submit(nonce, sign_str, timestamp, device_times, sleep_time, vote_id, vote_i
     data = {"vote_id": vote_id, "choices": choices, "platform": 0, "device_id": device_id, "timestamp": timestamp,
             "nonce": nonce, "sign": sign_str}
 
-    for i in range(device_times):
+    for i in range(int(device_times)):
         response = requests.post('http://api.vote.cmstop.com/api/stat', headers=headers, data=json.dumps(data),
                                  verify=False)
         res = json.loads(response.text)
@@ -113,5 +113,5 @@ if __name__ == '__main__':
     times = input("请输入每人投票次数，不输入默认 2（输入后按回车键确认）:") or 2
     # 每次之后的休息时间，最少1秒，不要给投票软件造成负担
     sleep_time = 1
-    for i in range(total):
+    for i in range(int(total)):
         sign(times, sleep_time, vote_id, vote_item_id)
