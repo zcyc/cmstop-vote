@@ -30,10 +30,13 @@ def sign():
     response = requests.post('http://api.vote.cmstop.com/api/get_sign', headers=headers, data=json.dumps(data),
                              verify=False)
     # print("response: ", response.text)
-    res = json.loads(response.text)['data']
-    # print("timestamp: ", res['timestamp'])
-    # print("sign: ", res['sign'])
-    submit(nonce, res['sign'], res['timestamp'])
+    try:
+        res = json.loads(response.text)['data']
+        # print("timestamp: ", res['timestamp'])
+        # print("sign: ", res['sign'])
+        submit(nonce, res['sign'], res['timestamp'])
+    except Exception as err:
+        print(err, response.text)
 
 
 def submit(nonce, sign_str, timestamp):
@@ -52,7 +55,6 @@ def submit(nonce, sign_str, timestamp):
         'Referer': 'http://h5.vote.cmstop.com/',
         'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
     }
-
     # 生成随机设备id，用来突破投票限制
     device_id = ''.join(random.sample(string.ascii_letters + string.digits, 32)).lower()
     # print("device_id: ", device_id)
@@ -66,31 +68,34 @@ def submit(nonce, sign_str, timestamp):
     for i in range(int(times)):
         response = requests.post('http://api.vote.cmstop.com/api/stat', headers=headers, data=json.dumps(data),
                                  verify=False)
-        res = json.loads(response.text)
-        if res["message"] == 'time expire':
-            person_times += 1
-            fail_num += 1
-            current_times += 1
-            print(
-                f'{res["message"]}，当前进度：{current_times}票/{int(persons) * int(times)}票，第{current_persons}人-第{person_times}次'
-                f'/{int(persons)}人，成功{success_num}次，失败{fail_num}次。')
-            sleep(60)
-        elif res["message"] == 'Too Many Attempts.':
-            person_times += 1
-            fail_num += 1
-            current_times += 1
-            print(
-                f'{res["message"]}，当前进度：{current_times}票/{int(persons) * int(times)}票，第{current_persons}人-第{person_times}次'
-                f'/{int(persons)}人，成功{success_num}次，失败{fail_num}次。')
-            sleep(30)
-        else:
-            person_times += 1
-            success_num += 1
-            current_times += 1
-            print(
-                f'{res["message"]}，当前进度：{current_times}票/{int(persons) * int(times)}票，第{current_persons}人-第{person_times}次'
-                f'/{int(persons)}人，成功{success_num}次，失败{fail_num}次。')
-            sleep(sleep_time)
+        try:
+            res = json.loads(response.text)
+            if res["message"] == 'time expire':
+                person_times += 1
+                fail_num += 1
+                current_times += 1
+                print(
+                    f'{res["message"]}，当前进度：{current_times}票/{int(persons) * int(times)}票，第{current_persons}人-第{person_times}次'
+                    f'/{int(persons)}人，成功{success_num}次，失败{fail_num}次。')
+                sleep(60)
+            elif res["message"] == 'Too Many Attempts.':
+                person_times += 1
+                fail_num += 1
+                current_times += 1
+                print(
+                    f'{res["message"]}，当前进度：{current_times}票/{int(persons) * int(times)}票，第{current_persons}人-第{person_times}次'
+                    f'/{int(persons)}人，成功{success_num}次，失败{fail_num}次。')
+                sleep(30)
+            else:
+                person_times += 1
+                success_num += 1
+                current_times += 1
+                print(
+                    f'{res["message"]}，当前进度：{current_times}票/{int(persons) * int(times)}票，第{current_persons}人-第{person_times}次'
+                    f'/{int(persons)}人，成功{success_num}次，失败{fail_num}次。')
+                sleep(sleep_time)
+        except Exception as err:
+            print(err, response.text)
 
 
 def get():
@@ -108,7 +113,10 @@ def get():
         f'http://api.vote.cmstop.com/api/groups?vote_id={vote_id}&offset=0&order_key=number&order_by=asc&title={title}',
         headers=headers, verify=False)
     # print(response.text)
-    return json.loads(response.text)["data"]["data"][0]
+    try:
+        return json.loads(response.text)["data"]["data"][0]
+    except Exception as err:
+        print(err, response.text)
 
 
 # 获取网址的最后一截作为 vote_id
